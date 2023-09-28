@@ -9,15 +9,19 @@ export const fetchTrending = async () => {
   return response.data.results;
 };
 
-export const fetchMovieDetails = async ({ movieId }) => {
+export const fetchDetails = async ({ movieId }) => {
   const details = await axios.get(`movie/${movieId}?api_key=${API_KEY}`);
+  return details.data;
+};
+
+export const fetchCast = async ({ movieId }) => {
   const cast = await axios.get(`movie/${movieId}/credits?api_key=${API_KEY}`);
+  return cast.data.cast;
+};
+
+export const fetchReviews = async ({ movieId }) => {
   const reviews = await axios.get(`movie/${movieId}/reviews?api_key=${API_KEY}`);
-  return {
-    details: details.data,
-    cast: cast.data.cast,
-    reviews: reviews.data.results,
-  };
+  return reviews.data.results;
 };
 
 export const fetchSearch = async ({ query }) => {
@@ -25,7 +29,7 @@ export const fetchSearch = async ({ query }) => {
   return response.data.results;
 };
 
-fetchMovieDetails.propTypes = {
+fetchDetails.propTypes = {
   movieId: PropTypes.number.isRequired,
 };
 
