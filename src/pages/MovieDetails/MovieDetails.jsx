@@ -1,15 +1,16 @@
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense, useState } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 import { Btn } from './MovieDetails.styled';
 import { AdditionalInfo, MovieInfo } from 'components';
+import { useMount } from 'react-use';
 
 export const MovieDetails = () => {
   const [backLink, setBackLink] = useState('');
   const location = useLocation();
 
-  useEffect(() => {
+  useMount(() => {
     setBackLink(location.state?.from.pathname + location.state?.from.search || '/');
-  }, [location]);
+  });
 
   return (
     <div>
